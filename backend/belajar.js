@@ -8,10 +8,10 @@ const mysql = require("mysql");
 const app = express();
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "stok_barang",
+  host: "5.181.216.42",
+  user: "u1084987_kelompok_3",
+  password: "f2d7tvdcjvi7",
+  database: "u1084987_kelompok_3",
 });
 
 app.use(bodyParser.json());
@@ -42,11 +42,14 @@ app.get("/data-barang", (req, res) => {
 app.post("/data-barang", (req, res) => {
   let dataInputan = {
     id_barang: req.body.id_barang,
+    id_kategori: req.body.id_kategori,
     nama_barang: req.body.nama_barang,
     foto_barang: req.body.foto_barang,
     deskripsi: req.body.deskripsi,
-    jumlah: req.body.jumlah,
+    jumlah_barang: req.body.jumlah_barang,
     harga_barang: req.body.harga_barang,
+    created_at: req.body.created_at,
+    updated_at: req.body.updated_at,
   };
 
   connection.query(
@@ -72,18 +75,21 @@ app.delete("/data-barang/:id_barang", (req, res) => {
 app.put("/data-barang/:id_barang", (req, res) => {
 
     let id_barang = req.body.id_barang;
+    let id_kategori = req.body.id_kategori;
     let nama_barang = req.body.nama_barang;
     let foto_barang = req.body.foto_barang;
     let deskripsi = req.body.deskripsi;
-    let jumlah = req.body.jumlah;
+    let jumlah_barang = req.body.jumlah_barang;
     let harga_barang = req.body.harga_barang;
+    let created_at= req.body.created_at;
+    let updated_at= req.body.updated_at;
 
   // UPDATE table_name
   // SET column1 = value1, column2 = value2, ...
   // WHERE condition;
 
   connection.query(
-    'UPDATE data_barang SET id_barang =? , nama_barang =? , foto_barang =?, deskripsi =? , jumlah =? , harga_barang =? WHERE id_barang =?',[id_barang,nama_barang,foto_barang,deskripsi,jumlah,harga_barang,id_barang],
+    'UPDATE data_barang SET id_barang =? , id_kategori=? , nama_barang =? , foto_barang =?, deskripsi =? , jumlah_barang =? , harga_barang =?, created_at=?,  WHERE id_barang =?, updated_at=?',[id_barang,id_kategori,nama_barang,foto_barang,deskripsi,jumlah_barang,harga_barang,created_at,updated_at,id_barang],
     (error, results) => {
       console.log(error);
       res.send(results);
@@ -91,6 +97,6 @@ app.put("/data-barang/:id_barang", (req, res) => {
   );
 });
 
-app.listen(3000, () => {
+app.listen(3004, () => {
   console.log("backend run....");
 });

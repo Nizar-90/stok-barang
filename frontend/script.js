@@ -1,5 +1,5 @@
 
-axios.get("http://localhost:3000/data-barang")
+axios.get("http://localhost:3004/data-barang")
 .then((response) => {
     let data = response.data;
     console.log(data);
@@ -17,5 +17,5 @@ axios.get("http://localhost:3000/data-barang")
             <td class="harga">${data_barang.harga_barang}</td>
         </tr>`
     });
-    document.querySelector(".data-barang").innerHTML = htmlBarang;
+    document.querySelector("tbody").innerHTML = htmlBarang;
 })
